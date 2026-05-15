@@ -410,7 +410,7 @@
 
 <section class="hero">
     <div class="hero-badge">⚠️ 2026年3月高危预警：默认配置存在严重漏洞</div>
-    <h1>别让您的AI智能体<br><span>成为黑客的“肉鸡”</span></h1>
+    <h1>别让您的AI智能体<br><span>成为黑客的"肉鸡"</span></h1>
     <p>专为 OpenClaw (ClawdBot/MoltBot) 打造的企业级安全防护体系。<br>解决提示注入、权限滥用、数据泄露三大核心风险，让AI真正安全可控。</p>
     <div style="margin-top:30px;display:flex;gap:20px;">
         <a href="#scanner" class="btn-shield" style="padding:15px 30px;">立即免费扫描</a>
@@ -445,7 +445,7 @@
                     <li>生成详细的安全加固建议报告</li>
                     <li>支持 Docker/K8s 环境快速部署</li>
                 </ul>
-                <button class="btn-outline" onclick="window.open('https://github.com/rao5201/chxw-aqfh/blob/0d1dc511316bed06bdc3f26c107dd150e66af9a2/ClawScanner_V1.0.zip','_blank')">GitHub 免费下载</button>
+                <button class="btn-outline" onclick="window.open('https://github.com/rao5201/chxw-aqfh/releases','_blank')">GitHub 免费下载</button>
                 <button class="btn-outline" style="margin-top:10px;border-color:var(--success-color);color:var(--success-color);" onclick="window.open('https://share.note.youdao.com/s/LapJ0LzK','_blank')">查看发布说明 (有道云)</button>
             </div>
         </div>
@@ -525,7 +525,7 @@
                 </ul></div>
                 <div class="changelog-category"><h4>🎨 体验细节</h4><ul>
                     <li>风险卡片 hover 动效增强，新增背景色渐变和 translateY 位移，提升交互反馈</li>
-                    <li>企业版防护盾卡片新增专属渐变背景和高亮边框，突出核心产品</li>
+                    <li>��业版防护盾卡片新增专属渐变背景和高亮边框，突出核心产品</li>
                     <li>页脚新增漏洞提交、隐私政策等快捷链接，补充完整的免责声明</li>
                     <li>Hero 区域新增「2026 年 3 月高危预警」徽章，强化风险提示</li>
                 </ul></div>
@@ -577,7 +577,7 @@
                 <li>GitHub 官方下载链接正式上线</li>
                 <li>新增有道云笔记 - 发布说明文档链接</li>
                 <li>模块样式优化，按钮区分下载、查看文档，视觉更清晰</li>
-                <li>功能介绍文案更新，突出“一键检测、高危识别、报告生成、容器部署”四大能力</li>
+                <li>功能介绍文案更新，突出"一键检测、高危识别、报告生成、容器部署"四大能力</li>
             </ul>
         </div>
 
@@ -652,45 +652,43 @@
             const newCursor = document.createElement('span');
             newCursor.className = 'cursor';
             newCursor.innerText = '_';
-            div.appendChild(newCursor);
+            container.appendChild(newCursor);
             lineIndex++;
             setTimeout(typeWriter, 800);
         }
     }
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && lineIndex === 0) {
-                setTimeout(typeWriter, 1000);
-            }
-        });
-    }, { threshold: 0.5 });
-    observer.observe(document.querySelector('.scanner-demo'));
+    setTimeout(typeWriter, 2000);
 
     function handleSecuritySubmit(e) {
         e.preventDefault();
-        const btn = document.querySelector('.submit-btn');
+        const btn = e.target.querySelector('.submit-btn');
         const originalText = btn.innerText;
-        btn.innerText = '正在加密传输数据...';
-        btn.style.opacity = '0.7';
+        btn.innerText = '🔄 加密提交中...';
+        btn.disabled = true;
         setTimeout(() => {
-            alert('✅ 申请已接收！\n\n我们的安全专家将向您发送一份《OpenClaw 初始风险评估问卷》，请注意查收邮件。');
-            btn.innerText = '提交成功';
-            btn.style.background = '#00C853';
-            document.querySelector('form').reset();
+            btn.innerText = '✓ 提交成功';
+            btn.style.background = 'var(--success-color)';
             setTimeout(() => {
                 btn.innerText = originalText;
+                btn.disabled = false;
                 btn.style.background = '';
-                btn.style.opacity = '1';
-            }, 3000);
+                e.target.reset();
+            }, 2000);
         }, 1500);
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 </script>
+
 </body>
 </html>
